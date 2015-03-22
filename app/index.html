@@ -6,15 +6,20 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>Front End Technical Interview</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body>
+<body ng-controller="interviewFormCtrl">
   <ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
@@ -24,6 +29,68 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
+<h2>Front End Technical Interview</h2>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="genCount" class="col-sm-3 control-label">Number of General Questions</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="genCount" placeholder="0" ng-model="genCount"> Max: {{max_num}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="htmlCount" class="col-sm-3 control-label">Number of HTML Questions</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="htmlCount" placeholder="0" ng-model="htmlCount">
+            </div>
+        </div>
+ 
+        <div class="form-group">
+            <label for="cssCount" class="col-sm-3 control-label">Number of CSS Questions</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="cssCount" placeholder="0">
+            </div>
+        </div>
+            
+        <div class="form-group">
+            <label for="jsCount" class="col-sm-3 control-label">Number of JS Questions</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="jsCount" placeholder="0">
+            </div>
+        </div>
+ 
+        <div class="form-group">
+            <label for="jqueryCount" class="col-sm-3 control-label">Number of jQuery Questions</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="jqueryCount" placeholder="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="codingCount" class="col-sm-3 control-label">Number of Coding Questions</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="codingCount" placeholder="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="funCount" class="col-sm-3 control-label">Number of Fun Questions</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="funCount" placeholder="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-default">Get Questions</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="questions">
+    </div>
+
   <div ng-view></div>
 
   <div>Angular seed app: v<span app-version></span></div>
@@ -31,9 +98,11 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-  <script src="bower_components/angular/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+  <!--<script src="bower_components/angular/angular.js"></script> -->
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
+  <script src="main/main.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
   <script src="components/version/version.js"></script>
