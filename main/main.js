@@ -9,7 +9,7 @@ angular.module('myApp.main', [])
 //   });
 // }])
 
-.factory('dataCollection', [function questionsArrayFactory() { //need $http?
+.factory('dataCollection', ['$http', function questionsArrayFactory($http) { //need $http?
 			var interviewUrl = 'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
 
 			//helper function
@@ -25,7 +25,7 @@ angular.module('myApp.main', [])
 			function getCategories(data) {  //alt could get this via <h4> but drop the last one for contributors; probably <h4> is more stable than the current selector?
 			  var categoryList = $(data).find('ol:nth-of-type(1)');
 			  //console.log(categoryList.length);
-			  var categoryStr = categoryList[0].innerHTML;//innerText
+			  var categoryStr = categoryList[0].innerText;//innerHTML
 			  
 			  return parseList(categoryStr);
 			}
@@ -101,26 +101,48 @@ angular.module('myApp.main', [])
 			  return questionsArResult;
 			}
 
-				$.ajax({
-				  url: interviewUrl,
-				  //context: document.body,
-				  dataType: 'html'
-				}).done(function(data) {
-				  var categoriesAr = getCategories(data);
+			$http.get(interviewUrl, {responseType: 'text'})
+				.success(function(data, status, headers) {
+					//console.log(data);
+					var categoriesAr = getCategories(data);
 				  var questionsAr = getAllQuestions(data);
 				  var questionsObj = buildObj(categoriesAr, questionsAr);
+				  console.log(questionsObj);
+				  return questionsObj;
+				})
+				.error(function(err) {
+					console.log('error: ' + err);
+				});
+				// .then(function(response) {
+				//   var categoriesAr = getCategories(response);
+				//   var questionsAr = getAllQuestions(response);
+				//   var questionsObj = buildObj(categoriesAr, questionsAr);
+				//   console.log(questionsObj);
+				//   return questionsObj;
+				// })
+				// .catch(function(err){
+				//   console.log( "error: " + err );
+				// });
+
+				// $.ajax({
+				//   url: interviewUrl,
+				//   dataType: 'html'
+				// }).done(function(data) {
+				//   var categoriesAr = getCategories(data);
+				//   var questionsAr = getAllQuestions(data);
+				//   var questionsObj = buildObj(categoriesAr, questionsAr);
 				  //var div = document.querySelector('div.questions');
 				  //var ul = document.createElement('ul');
 	 
 				  //ul.appendChild(getRandomGeneralQuestions(questionsObj, 5));
 				  //div.appendChild(ul);
-				  console.log(questionsObj);
-				  return questionsObj;
+				  // console.log(questionsObj);
+				  // return questionsObj;
 	//TODO next call causes the browser to hang
 				  //console.log(getRandomGeneralQuestions(questionsObj, 5));
-				}).fail(function(err) {
-				  console.log( "error: " + err );
-				});
+				// }).fail(function(err) {
+				//   console.log( "error: " + err );
+				// });
 
 }])
 
