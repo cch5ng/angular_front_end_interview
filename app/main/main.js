@@ -64,12 +64,13 @@ angular.module('myApp.main', [])
 
 //TODO fix this loop so that I don't end up with a questions element that contains a single element array of another array containing the questions
 			  for (var i = 0; i < allLists.length; i++) {
-			    var categoryQuestionsStr = allLists[i].innerHTML;//innerText
-			    var categoryQuestionsAr = [];
+			    //var categoryQuestionsStr = allLists[i].innerHTML;//innerText
+			    //var categoryQuestionsAr = [];
 
 //TODO figure out where to read the li's innerHTML, right now if I try to push that directly, it breaks the application (browser freezes)
-			    categoryQuestionsAr.push($(allLists[i]).children('li'));
-			    questionsListByCategory.push(categoryQuestionsAr);
+			    //categoryQuestionsAr.push($(allLists[i]).children('li'));
+			    questionsListByCategory.push($(allLists[i]).children('li'));
+			    //questionsListByCategory.push(categoryQuestionsAr);
 			      //questionsListByCategory.push(parseList(categoryQuestionsStr));
 			  }
 			  
