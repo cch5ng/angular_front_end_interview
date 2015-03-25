@@ -6,9 +6,6 @@ angular.module('myApp.main', []).
 		var interviewUrl = 'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
 
 		//helper function
-		function getRandomInt(min, max) {
-		  return Math.floor(Math.random() * (max - min)) + min;
-		}
 
 		/**
 		 * @param data {string} html for the page, interviewUrl
@@ -120,12 +117,62 @@ angular.module('myApp.main', []).
 			$scope.max_num5 = $scope.questionsObj[4].questions.length;
 			$scope.max_num6 = $scope.questionsObj[5].questions.length;
 			$scope.max_num7 = $scope.questionsObj[6].questions.length;
+			$scope.maxNumAr = [$scope.max_num1, $scope.max_num2, $scope.max_num3, $scope.max_num4, $scope.max_num5, $scope.max_num6, $scope.max_num7];
 
 			//$scope.category1 = $scope.questionsObj[0].category; //test
 		}, function(error) {
 			console.log('error: ' + error);
 		});
 
+		//helper functions
+		function getRandomInt(min, max) {
+		  return Math.floor(Math.random() * (max - min)) + min;
+		}
+
+		function getRandomQuestions(categoryNum, questionsCount) {
+			var randomQuestionsList = [];
+			var questionIndices = [];
+
+			for (var i = 0; i < questionsCount; i++) {
+	        var randomIdx = getRandomInt(0, $scope.maxNumAr[categoryNum]);
+	        while (questionIndices.indexOf(randomIdx) >= 0) {
+	            randomIdx = getRandomInt(0, $scope.maxNumAr[categoryNum]);
+	        }
+	        questionIndices.push(randomIdx);
+//TODO maybe this helps resolve browser hanging
+	        var question = $scope.questionsObj[categoryNum].questions[randomIdx].innerHTML;
+	        //var question = questionsAr[0].questions[randomIdx];
+	        console.log(question);
+	        randomQuestionsList.push(question);
+	    }
+
+			return randomQuestionsList;
+		}
+
+		$scope.randomQuestionsAr = function() {
+			var randomQuestions = [];
+			$scope.requestedQuestions = [$scope.genCount, $scope.htmlCount, $scope.cssCount, $scope.jsCount, $scope.jqueryCount, $scope.codingCount, $scope.funCount];
+			console.log('length $scope.requestedQuestions: ' + $scope.requestedQuestions.length);
+
+			for (var i = 0; i < $scope.requestedQuestions.length; i++) {
+				var categorySet = {};
+
+				console.log('$scope.requestedQuestions[i]: ' + $scope.requestedQuestions[i]);
+
+				if ($scope.requestedQuestions[i] > 0) {
+					console.log('entered this loop');
+					categorySet.category = $scope.questionsObj[i].category;
+					console.log('categorySet.category: ' + categorySet.category);
+					categorySet.questions = getRandomQuestions(i, $scope.requestedQuestions[i]);
+					console.log('categorySet.questions: ' + categorySet.questions);
+					randomQuestions.push(categorySet);
+				}
+			}
+
+			//console.log('categorySet: ' + $scope.categorySet);
+			console.log('randomQuestions: ' + randomQuestions);
+			$scope.randomQuestionsByCateg = randomQuestions;
+		};
 
 	}]);
 
