@@ -174,36 +174,15 @@ angular.module('myApp.main', []).
 			$scope.randomQuestionsByCateg = randomQuestions;
 		};
 
-	}]);
+		$scope.clear = function() {
+			$scope.genCount = 0;
+			$scope.htmlCount = 0;
+			$scope.cssCount = 0;
+			$scope.jsCount = 0;
+			$scope.jqueryCount = 0;
+			$scope.codingCount = 0;
+			$scope.funCount = 0;
+			$scope.randomQuestionsByCateg = [];
+		};
 
-//////////////
-// want to add this to controller
-			//TODO when I try to call this one, the browser freezes and chrome helper uses 100% cpu
-//    might have broken functionality when I switched storage to innerHTML rather than innerText values
-			// function getRandomGeneralQuestions(questionsAr, count) {
-			//     var randomQuestions = [];
-			//     var questionIndices = [];
-			//     var totalGeneralQuestions = questionsAr[0].questions[0].length;
-			//     console.log('questionsAr[0].questions' + questionsAr[0].questions);
-			//     console.log('totalGeneralQuestions: ' + totalGeneralQuestions);
-			    //var h4 = document.createElement('h4');
-			    //h4.innerHTML = 'General Questions';
-			    //var div = document.querySelector('div.questions');
-			    //div.appendChild(h4);
-			    // console.log('Random General Questions');
- 
-			    // for (var i = 0; i < count; i++) {
-			    //     var randomIdx = getRandomInt(0, totalGeneralQuestions);
-			    //     while (questionIndices.indexOf(randomIdx) >= 0) {
-			    //         randomIdx = getRandomInt(0, totalGeneralQuestions);
-			    //     }
-			    //     questionIndices.push(randomIdx);
-//TODO maybe this helps resolve browser hanging
-			    //     var question = questionsAr[0].questions[0][randomIdx].innerHTML;
-			    //     //var question = questionsAr[0].questions[randomIdx];
-			    //     console.log(question);
-			    //     randomQuestions.push(question);
-			    // }
-			    //console.log('length randomQuestions: ' + randomQuestions.length);
-			    //return randomQuestions;
-			// }
+	}]);
