@@ -32,54 +32,53 @@
   <![endif]-->
 
 <h2>Front End Technical Interview</h2>
-
     <form class="form-horizontal">
         <div class="form-group">
             <label for="genCount" class="col-sm-3 control-label">Number of General Questions</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="genCount" placeholder="0" ng-model="genCount"> Max: {{max_num}}
+                <input type="number" class="form-control" id="genCount" placeholder="0" min="0" max={{max_num1}} ng-model="genCount"> Max: {{max_num1}}
             </div>
         </div>
 
         <div class="form-group">
             <label for="htmlCount" class="col-sm-3 control-label">Number of HTML Questions</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="htmlCount" placeholder="0" ng-model="htmlCount">
+                <input type="number" class="form-control" id="htmlCount" placeholder="0" min="0" max={{max_num2}} ng-model="htmlCount"> Max: {{max_num2}}
             </div>
         </div>
- 
+
         <div class="form-group">
             <label for="cssCount" class="col-sm-3 control-label">Number of CSS Questions</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="cssCount" placeholder="0">
+                <input type="number" class="form-control" id="cssCount" placeholder="0" min="0" max={{max_num3}} ng-model="cssCount"> Max: {{max_num3}}
             </div>
         </div>
             
         <div class="form-group">
             <label for="jsCount" class="col-sm-3 control-label">Number of JS Questions</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="jsCount" placeholder="0">
+                <input type="number" class="form-control" id="jsCount" placeholder="0" min="0" max={{max_num4}} ng-model="jsCount"> Max: {{max_num4}}
             </div>
         </div>
  
         <div class="form-group">
             <label for="jqueryCount" class="col-sm-3 control-label">Number of jQuery Questions</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="jqueryCount" placeholder="0">
+                <input type="number" class="form-control" id="jqueryCount" placeholder="0" min="0" max={{max_num5}} ng-model="jqueryCount"> Max: {{max_num5}}
             </div>
         </div>
 
         <div class="form-group">
             <label for="codingCount" class="col-sm-3 control-label">Number of Coding Questions</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="codingCount" placeholder="0">
+                <input type="number" class="form-control" id="codingCount" placeholder="0" min="0" max={{max_num6}} ng-model="codingCount"> Max: {{max_num6}}
             </div>
         </div>
 
         <div class="form-group">
             <label for="funCount" class="col-sm-3 control-label">Number of Fun Questions</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" id="funCount" placeholder="0">
+                <input type="number" class="form-control" id="funCount" placeholder="0" min="0" max={{max_num7}} ng-model="funCount"> Max: {{max_num7}}
             </div>
         </div>
 
@@ -94,6 +93,13 @@
     </div>
 
   <div ng-view></div>
+
+  <div>
+    {{genCount}}
+    {{htmlCount}}
+    {{cssCount}}
+
+  </div>
 
   <div>Angular seed app: v<span app-version></span></div>
 
