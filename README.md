@@ -15,6 +15,10 @@
 * In the current form, as a web scraper, this source code is extremely brittle and if the original questions source contributors decide to change the format of their source html page, this application may break
 * (known issue) It would be better to parse the text from the main source README.mdn file but this is currently a little outside of my abilities
 
+## Disclaimer
+
+*Yeah, I could totally see you shaking your head wondering why someone would spend hours to create such an app when you could simply print out the original list and choose questions manually. Honestly, I was just curious how it would be possible to generate the data model from the current data storage (text or html).
+
 ## Resources
 
 [For using promises when controller depends on an async function within a service] (http://chariotsolutions.com/blog/post/angularjs-corner-using-promises-q-handle-asynchronous-calls/)
