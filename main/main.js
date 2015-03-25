@@ -86,14 +86,14 @@ angular.module('myApp.main', []).
 						var categoriesAr = getCategories(data);
 					  var questionsAr = getAllQuestions(data);
 					  var questionsObj = buildObj(categoriesAr, questionsAr);
-					  console.log(questionsObj); //here I'm getting the expected array results
+					  console.log(questionsObj);
 						deferred.resolve(questionsObj); //not sure about this syntax
 					})
 					.error(function(err) {
 						deferred.reject(err);
 						console.log('error: ' + err);
 					});
-					return deferred.promise;
+					return deferred.promise; //ask about this (why should it make a difference where you return from, under success or here?)
 			}
 		};
 	}]).
@@ -101,13 +101,31 @@ angular.module('myApp.main', []).
 	controller('interviewFormCtrl', ['$scope', '$q', 'dataCollection', function($scope, $q, dataCollection) {
 		var promise = dataCollection.getQuestionsArray();
 
+		$scope.genCount = 0;
+		$scope.htmlCount = 0;
+		$scope.cssCount = 0;
+		$scope.jsCount = 0;
+		$scope.jqueryCount = 0;
+		$scope.codingCount = 0;
+		$scope.funCount = 0;
+
 		promise.then(function(response) {
 			$scope.questionsObj = response;
 			console.log('controllers $scope.questionsObj: ' + $scope.questionsObj);
-			$scope.category1 = $scope.questionsObj[0].category;
+
+			$scope.max_num1 = $scope.questionsObj[0].questions.length;
+			$scope.max_num2 = $scope.questionsObj[1].questions.length;
+			$scope.max_num3 = $scope.questionsObj[2].questions.length;
+			$scope.max_num4 = $scope.questionsObj[3].questions.length;
+			$scope.max_num5 = $scope.questionsObj[4].questions.length;
+			$scope.max_num6 = $scope.questionsObj[5].questions.length;
+			$scope.max_num7 = $scope.questionsObj[6].questions.length;
+
+			//$scope.category1 = $scope.questionsObj[0].category; //test
 		}, function(error) {
 			console.log('error: ' + error);
 		});
+
 
 	}]);
 
