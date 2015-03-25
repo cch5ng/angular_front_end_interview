@@ -84,22 +84,19 @@
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-default">Get Questions</button>
+                <button type="submit" class="btn btn-default" ng-click="randomQuestionsAr()">Get Questions</button>
             </div>
         </div>
     </form>
 
     <div class="questions">
+      <h3>{{randomQuestionsByCateg[0].category}}<h3>
+      <ul>
+        <li ng-repeat="question in randomQuestionsByCateg[0].questions">{{question}}</li>
+      </ul>
     </div>
 
   <div ng-view></div>
-
-  <div>
-    {{genCount}}
-    {{htmlCount}}
-    {{cssCount}}
-
-  </div>
 
   <div>Angular seed app: v<span app-version></span></div>
 
