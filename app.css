@@ -1,5 +1,15 @@
 /* app css stylesheet */
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* full width for mobile devices */
+.container {
+  width: 100%;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -27,4 +37,12 @@
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+/* center on desktop */
+@media (min-width: 768px) {
+  .container {
+    width: 80%;
+    padding: 5px auto;
+  }
 }
