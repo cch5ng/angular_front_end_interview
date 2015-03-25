@@ -17,7 +17,7 @@
 
 ## Disclaimer
 
-*Yeah, I could totally see you shaking your head wondering why someone would spend hours to create such an app when you could simply print out the original list and choose questions manually. Honestly, I was just curious how it would be possible to generate the data model from the current data storage (text or html).
+* Yeah, I could totally see you shaking your head wondering why someone would spend hours to create such an app when you could simply print out the original list and choose questions manually. Honestly, I was just curious how it would be possible to generate the data model from the current data storage (text or html).
 
 ## Resources
 
