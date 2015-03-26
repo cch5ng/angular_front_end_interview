@@ -108,8 +108,7 @@ angular.module('myApp.main', []).
 
 		promise.then(function(response) {
 			$scope.questionsObj = response;
-			console.log('controllers $scope.questionsObj: ' + $scope.questionsObj);
-
+			//console.log('controllers $scope.questionsObj: ' + $scope.questionsObj);
 			$scope.max_num1 = $scope.questionsObj[0].questions.length;
 			$scope.max_num2 = $scope.questionsObj[1].questions.length;
 			$scope.max_num3 = $scope.questionsObj[2].questions.length;
@@ -118,8 +117,6 @@ angular.module('myApp.main', []).
 			$scope.max_num6 = $scope.questionsObj[5].questions.length;
 			$scope.max_num7 = $scope.questionsObj[6].questions.length;
 			$scope.maxNumAr = [$scope.max_num1, $scope.max_num2, $scope.max_num3, $scope.max_num4, $scope.max_num5, $scope.max_num6, $scope.max_num7];
-
-			//$scope.category1 = $scope.questionsObj[0].category; //test
 		}, function(error) {
 			console.log('error: ' + error);
 		});
