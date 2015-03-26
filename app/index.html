@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
 </head>
 <body ng-controller="interviewFormCtrl">
   <!--
@@ -34,7 +35,7 @@
   <div class="container">
 
   <h2>Front End Technical Interview</h2>
-      <form class="form-horizontal">
+      <form class="form-horizontal" ng-cloak class="ng-cloak">
           <div class="form-group">
               <label for="genCount" class="col-sm-3 control-label">Number of General Questions</label>
               <div class="col-sm-9">
@@ -111,7 +112,6 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
   <!--<script src="bower_components/angular/angular.js"></script> -->
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
