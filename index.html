@@ -92,11 +92,15 @@
           </div>
       </form>
 
-      <div class="questions" ng-repeat="questionSet in randomQuestionsByCateg">
+<!--       <div class="questions" ng-repeat="questionSet in randomQuestionsByCateg">
         <h3>{{questionSet.category}}<h3>
         <ul>
           <li ng-repeat="question in questionSet.questions">{{question}}</li>
         </ul>
+      </div> -->
+
+      <div class="questions" ng-repeat="questionSet in randomQuestionsByCateg">
+        <ccr-questions></ccr-questions>
       </div>
 
 <!--     <div ng-view></div>
@@ -110,6 +114,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
   <!--<script src="bower_components/angular/angular.js"></script> -->
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="app.js"></script>
   <script src="main/main.js"></script>
   <script src="view1/view1.js"></script>
