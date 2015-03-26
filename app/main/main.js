@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.main', []).
+angular.module('myApp.main', ['ngSanitize']).
 	factory('dataCollection', ['$http', '$q', function($http, $q) {
 		var deferred = $q.defer();
 		var interviewUrl = 'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
@@ -182,4 +182,12 @@ angular.module('myApp.main', []).
 			$scope.randomQuestionsByCateg = [];
 		};
 
-	}]);
+	}]).
+
+	directive('ccrQuestions', function() {
+		return {
+			restrict: 'E',
+			templateUrl: 'ccr-questions.html'
+		};
+
+	});
