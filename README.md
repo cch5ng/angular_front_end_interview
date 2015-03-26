@@ -13,7 +13,7 @@
 ## Caveats
 
 * In the current form, as a web scraper, this source code is extremely brittle and if the original questions source contributors decide to change the format of their source html page, this application may break
-* (known issue) It would be better to parse the text from the main source README.mdn file but this is currently a little outside of my abilities
+* (known issue) It would be better to parse the text from the main source [README.mdn](https://github.com/h5bp/Front-end-Developer-Interview-Questions) file but this is currently a little outside of my abilities
 
 ## Disclaimer
 
@@ -21,4 +21,6 @@
 
 ## Resources
 
-[For using promises when controller depends on an async function within a service] (http://chariotsolutions.com/blog/post/angularjs-corner-using-promises-q-handle-asynchronous-calls/)
+* Promises
+  * Concepts video
+  * [For using promises when controller depends on an async function within a service] (http://chariotsolutions.com/blog/post/angularjs-corner-using-promises-q-handle-asynchronous-calls/)
