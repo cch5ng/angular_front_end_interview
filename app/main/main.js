@@ -3,7 +3,7 @@
 angular.module('myApp.main', ['ngSanitize']).
 	factory('dataCollection', ['$http', '$q', function($http, $q) {
 		var deferred = $q.defer();
-		var interviewUrl = 'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
+		var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview';//'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
 
 		//helper function
 
@@ -88,7 +88,7 @@ angular.module('myApp.main', ['ngSanitize']).
 
 		return {
 			getQuestionsArray: function() {
-				$http.get(interviewUrl), {responseType: 'document'})
+				$http.get(interviewUrl , {responseType: 'document'})
 					.success(function(data, status, headers) {
 						var categoriesAr = getCategories(data);
 					  var questionsAr = getAllQuestions(data);
