@@ -3,7 +3,9 @@
 angular.module('myApp.main', ['ngSanitize']).
 	factory('dataCollection', ['$http', '$q', function($http, $q) {
 		var deferred = $q.defer();
-		var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview';//'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
+		var interviewUrl = '/app/src/h5bp_readme.html';
+		//var interviewUrl = 'https://h5bp.github.io/Front-end-Developer-Interview-Questions';//
+		//var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview/h5bp_readme.html';//'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
 
 		//helper function
 
@@ -14,6 +16,7 @@ angular.module('myApp.main', ['ngSanitize']).
 		 */
 		function getCategories(data) {  //alt could get this via <h4> but drop the last one for contributors; probably <h4> is more stable than the current selector?
 		  console.log('data: ' + data);
+		  console.log('data.documentElement: ' + data.documentElement);
 		  //console.log('length data: ' + data.length);
 		  //console.log(typeof data);
 		  //var categoryList = data.querySelector('ol');
@@ -84,7 +87,7 @@ angular.module('myApp.main', ['ngSanitize']).
 
 		return {
 			getQuestionsArray: function() {
-				$http.get(interviewUrl , [{responseType: 'document'}])
+				$http.get(interviewUrl , {responseType: 'document'})
 					.success(function(data, status, headers) {
 						var categoriesAr = getCategories(data);
 					  var questionsAr = getAllQuestions(data);
