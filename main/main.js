@@ -54,10 +54,13 @@ angular.module('myApp.main', ['ngSanitize']).
 		 *     sets matches the order of categories from getCategories()
 		 */
 		function getAllQuestions(data) {
-		  var allLists = $(data).find('ul'); //find('body').children('ul'); // 
+		  var allLists = $(data).find('body').children('ul'); // // 
+		  //var allLists = $(data).find('ul'); //find('body').children('ul'); // 
 		  console.log('allLists: ' + allLists);
 		  console.log(allLists[0].innerHTML);
-		  //var allListsLength = allLists.length;
+		  console.log(allLists[1].innerHTML);
+		  console.log(allLists[2].innerHTML);
+		  var allListsLength = allLists.length;
 		  console.log('allListsLength: ' + allListsLength);
 		  var questionsListByCategory = [];
 
@@ -127,7 +130,8 @@ angular.module('myApp.main', ['ngSanitize']).
 			$scope.max_num4 = $scope.questionsObj[3].questions.length;
 			$scope.max_num5 = $scope.questionsObj[4].questions.length;
 			$scope.max_num6 = $scope.questionsObj[5].questions.length;
-			$scope.max_num7 = $scope.questionsObj[6].questions.length;
+			//$scope.max_num7 = $scope.questionsObj[6].questions.length || 0;
+			$scope.max_num7 = 0; //placeholder
 			$scope.maxNumAr = [$scope.max_num1, $scope.max_num2, $scope.max_num3, $scope.max_num4, $scope.max_num5, $scope.max_num6, $scope.max_num7];
 		}, function(error) {
 			console.log('error: ' + error);
