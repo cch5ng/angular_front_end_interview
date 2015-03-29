@@ -91,6 +91,19 @@ angular.module('myApp.main', ['ngSanitize']).
 		  return questionsArResult;
 		}
 
+		/**
+		 * @param questionsLst [{category: 'mycat', [questions node list]}, ...]
+		 * updates the array of question list sets so that the Fun Questions comes before the Coding Questions
+		 *     (workaround for issue with parsing coding questions because they don't use the standard list format)
+		 */
+		function fixQuestionsObj(questionsLst) {
+			var fixQuestionsObj = questionsLst.slice(0);
+			fixQuestionsObj[5].category = 'Fun Questions';
+			fixQuestionsObj[6].category = 'Coding Questions';
+
+			return fixQuestionsObj;
+		}
+
 		return {
 			getQuestionsArray: function() {
 				$http.get(interviewUrl , {responseType: 'document'})
@@ -99,7 +112,8 @@ angular.module('myApp.main', ['ngSanitize']).
 					  var questionsAr = getAllQuestions(data);
 					  var questionsObj = buildObj(categoriesAr, questionsAr);
 					  console.log(questionsObj);
-						deferred.resolve(questionsObj); //not sure about this syntax
+					  var fixedQuestionsObj = fixQuestionsObj(questionsObj);
+						deferred.resolve(fixedQuestionsObj); //not sure about this syntax
 					})
 					.error(function(err) {
 						deferred.reject(err);
@@ -118,8 +132,8 @@ angular.module('myApp.main', ['ngSanitize']).
 		$scope.cssCount = 0;
 		$scope.jsCount = 0;
 		$scope.jqueryCount = 0;
-		$scope.codingCount = 0;
 		$scope.funCount = 0;
+		$scope.codingCount = 0;
 
 		promise.then(function(response) {
 			$scope.questionsObj = response;
@@ -164,7 +178,7 @@ angular.module('myApp.main', ['ngSanitize']).
 
 		$scope.randomQuestionsAr = function() {
 			var randomQuestions = [];
-			$scope.requestedQuestions = [$scope.genCount, $scope.htmlCount, $scope.cssCount, $scope.jsCount, $scope.jqueryCount, $scope.codingCount, $scope.funCount];
+			$scope.requestedQuestions = [$scope.genCount, $scope.htmlCount, $scope.cssCount, $scope.jsCount, $scope.jqueryCount, $scope.funCount, $scope.codingCount];
 			console.log('length $scope.requestedQuestions: ' + $scope.requestedQuestions.length);
 
 			for (var i = 0; i < $scope.requestedQuestions.length; i++) {
