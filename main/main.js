@@ -13,8 +13,18 @@ angular.module('myApp.main', ['ngSanitize']).
 		 *
 		 */
 		function getCategories(data) {  //alt could get this via <h4> but drop the last one for contributors; probably <h4> is more stable than the current selector?
+		  console.log('data: ' + data);
 		  var categoryList = $(data).find('ol:nth-of-type(1)');
+			// categoryList.each(function( index ) {
+			// 	console.log( index + ": " + $( this ) );
+			// });
+
+
+
+		  //var categoryList = $(data).find('ol:nth-of-type(1)'); //
+		  console.log('categoryList: ' + categoryList);
 		  var categoryStr = categoryList[0].innerText;//innerHTML
+		  console.log('categoryStr: ' + categoryStr);
 
 		  return parseList(categoryStr);
 		}
@@ -78,7 +88,7 @@ angular.module('myApp.main', ['ngSanitize']).
 
 		return {
 			getQuestionsArray: function() {
-				$http.get(interviewUrl, {responseType: 'text'})
+				$http.get(interviewUrl), {responseType: 'document'})
 					.success(function(data, status, headers) {
 						var categoriesAr = getCategories(data);
 					  var questionsAr = getAllQuestions(data);
@@ -108,7 +118,7 @@ angular.module('myApp.main', ['ngSanitize']).
 
 		promise.then(function(response) {
 			$scope.questionsObj = response;
-			//console.log('controllers $scope.questionsObj: ' + $scope.questionsObj);
+			console.log('controllers $scope.questionsObj: ' + $scope.questionsObj);
 			$scope.max_num1 = $scope.questionsObj[0].questions.length;
 			$scope.max_num2 = $scope.questionsObj[1].questions.length;
 			$scope.max_num3 = $scope.questionsObj[2].questions.length;
