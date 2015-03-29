@@ -54,8 +54,11 @@ angular.module('myApp.main', ['ngSanitize']).
 		 *     sets matches the order of categories from getCategories()
 		 */
 		function getAllQuestions(data) {
-		  var allLists = $(data).find('section').children('ul'); 
-		  var allListsLength = allLists.length;
+		  var allLists = $(data).find('ul'); //find('body').children('ul'); // 
+		  console.log('allLists: ' + allLists);
+		  console.log(allLists[0].innerHTML);
+		  //var allListsLength = allLists.length;
+		  console.log('allListsLength: ' + allListsLength);
 		  var questionsListByCategory = [];
 
 		  for (var i = 0; i < allLists.length; i++) {
