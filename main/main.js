@@ -14,14 +14,10 @@ angular.module('myApp.main', ['ngSanitize']).
 		 */
 		function getCategories(data) {  //alt could get this via <h4> but drop the last one for contributors; probably <h4> is more stable than the current selector?
 		  console.log('data: ' + data);
+		  //console.log('length data: ' + data.length);
+		  //console.log(typeof data);
+		  //var categoryList = data.querySelector('ol');
 		  var categoryList = $(data).find('ol:nth-of-type(1)');
-			// categoryList.each(function( index ) {
-			// 	console.log( index + ": " + $( this ) );
-			// });
-
-
-
-		  //var categoryList = $(data).find('ol:nth-of-type(1)'); //
 		  console.log('categoryList: ' + categoryList);
 		  var categoryStr = categoryList[0].innerText;//innerHTML
 		  console.log('categoryStr: ' + categoryStr);
@@ -88,7 +84,7 @@ angular.module('myApp.main', ['ngSanitize']).
 
 		return {
 			getQuestionsArray: function() {
-				$http.get(interviewUrl , {responseType: 'document'})
+				$http.get(interviewUrl , [{responseType: 'document'}])
 					.success(function(data, status, headers) {
 						var categoriesAr = getCategories(data);
 					  var questionsAr = getAllQuestions(data);
