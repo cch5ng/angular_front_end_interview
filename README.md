@@ -13,7 +13,7 @@
 ## Caveats
 
 * In the current form, as a web scraper, this source code is extremely brittle and if the original questions source contributors decide to change the format of their source html page, this application may break
-* (known issue) It would be better to parse the text from the main source [README.mdn](https://github.com/h5bp/Front-end-Developer-Interview-Questions) file but this is currently a little outside of my abilities.
+* (known issue) It would be better to parse the text from the main source [README.mdn](https://github.com/h5bp/Front-end-Developer-Interview-Questions) file but this is currently a little outside of my abilities. (update) I just got a suggestion from a JS.LA cohort (shout to Aaron) to look for a markup parser so I'm going to check one out - SWEEEETTT!
   * Note that in the README.mdn, there is no jQuery section and there is a Networking section but these changes have not been reflected in the project's gh-pages site (used as this application's source)
 
 ## Disclaimer
@@ -23,5 +23,5 @@
 ## Resources
 
 * Promises
-  * Concepts video
-  * [For using promises when controller depends on an async function within a service] (http://chariotsolutions.com/blog/post/angularjs-corner-using-promises-q-handle-asynchronous-calls/)
+  * [Concepts video by Domenic Denicola](https://www.youtube.com/watch?v=MNxnHbyzhuo)
+  * [For using promises when controller depends on an async function within a service](http://chariotsolutions.com/blog/post/angularjs-corner-using-promises-q-handle-asynchronous-calls/)
