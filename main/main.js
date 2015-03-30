@@ -173,8 +173,7 @@ angular.module('myApp.main', ['ngSanitize']).
 			$scope.max_num4 = $scope.questionsObj[3].questions.length;
 			$scope.max_num5 = $scope.questionsObj[4].questions.length;
 			$scope.max_num6 = $scope.questionsObj[5].questions.length;
-			//$scope.max_num7 = $scope.questionsObj[6].questions.length || 0;
-			$scope.max_num7 = 0; //placeholder
+			$scope.max_num7 = $scope.questionsObj[6].questionsPt1.length; //note this different format from other categories
 			$scope.maxNumAr = [$scope.max_num1, $scope.max_num2, $scope.max_num3, $scope.max_num4, $scope.max_num5, $scope.max_num6, $scope.max_num7];
 		}, function(error) {
 			console.log('error: ' + error);
