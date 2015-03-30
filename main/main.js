@@ -5,7 +5,7 @@ angular.module('myApp.main', ['ngSanitize']).
 		var deferred = $q.defer();
 		var interviewUrl = '/app/src/h5bp_readme.html';
 		//var interviewUrl = 'https://h5bp.github.io/Front-end-Developer-Interview-Questions';//
-		//var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview/h5bp_readme.html';//'https://h5bp.github.io/Front-end-Developer-Interview-Questions';
+		//var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview/h5bp_readme.html';
 
 		//helper function
 
@@ -15,15 +15,15 @@ angular.module('myApp.main', ['ngSanitize']).
 		 *
 		 */
 		function getCategories(data) {  //alt could get this via <h4> but drop the last one for contributors; probably <h4> is more stable than the current selector?
-		  console.log('data: ' + data);
-		  console.log('data.documentElement: ' + data.documentElement);
+		  //console.log('data: ' + data);
+		  //console.log('data.documentElement: ' + data.documentElement);
 		  //console.log('length data: ' + data.length);
 		  //console.log(typeof data);
 		  //var categoryList = data.querySelector('ol');
 		  var categoryList = $(data).find('ol:nth-of-type(1)');
-		  console.log('categoryList: ' + categoryList);
+		  //console.log('categoryList: ' + categoryList);
 		  var categoryStr = categoryList[0].innerText;//innerHTML
-		  console.log('categoryStr: ' + categoryStr);
+		  //console.log('categoryStr: ' + categoryStr);
 
 		  return parseList(categoryStr);
 		}
@@ -56,12 +56,12 @@ angular.module('myApp.main', ['ngSanitize']).
 		function getAllQuestions(data) {
 		  var allLists = $(data).find('body').children('ul'); // // 
 		  //var allLists = $(data).find('ul'); //find('body').children('ul'); // 
-		  console.log('allLists: ' + allLists);
-		  console.log(allLists[0].innerHTML);
-		  console.log(allLists[1].innerHTML);
-		  console.log(allLists[2].innerHTML);
+		  //console.log('allLists: ' + allLists);
+		  //console.log(allLists[0].innerHTML);
+		  //console.log(allLists[1].innerHTML);
+		  //console.log(allLists[2].innerHTML);
 		  var allListsLength = allLists.length;
-		  console.log('allListsLength: ' + allListsLength);
+		  //console.log('allListsLength: ' + allListsLength);
 		  var questionsListByCategory = [];
 
 		  for (var i = 0; i < allLists.length; i++) {
@@ -104,6 +104,29 @@ angular.module('myApp.main', ['ngSanitize']).
 			return fixQuestionsObj;
 		}
 
+		function getCodingQuestionsPt1(data, questionsObj) {
+			var updatedQuestionsObj = questionsObj.slice(0);
+
+			var codingQuestionsList1 = $(data).find('p > em');
+			console.log('codingQuestionsList1: ' + codingQuestionsList1[0].innerHTML);
+			console.log('codingQuestionsList1: ' + codingQuestionsList1[1].innerHTML);
+			console.log('codingQuestionsList1: ' + codingQuestionsList1[5].innerHTML);
+			updatedQuestionsObj[6].questionsPt1 = codingQuestionsList1; //nodelist
+			return updatedQuestionsObj;
+		}
+
+		function getCodingQuestionsPt2(data, questionsObj) {
+			var updatedQuestionsObj = questionsObj.slice(0);
+
+			var codingQuestionsList2 = $(data).find('pre > code');
+			console.log('codingQuestionsList2: ' + codingQuestionsList2[0].innerHTML);
+			console.log('codingQuestionsList2: ' + codingQuestionsList2[1].innerHTML);
+			console.log('codingQuestionsList2: ' + codingQuestionsList2[5].innerHTML);
+			updatedQuestionsObj[6].questionsPt2 = codingQuestionsList2; //nodelist
+			return updatedQuestionsObj;
+		}
+
+
 		return {
 			getQuestionsArray: function() {
 				$http.get(interviewUrl , {responseType: 'document'})
@@ -111,9 +134,17 @@ angular.module('myApp.main', ['ngSanitize']).
 						var categoriesAr = getCategories(data);
 					  var questionsAr = getAllQuestions(data);
 					  var questionsObj = buildObj(categoriesAr, questionsAr);
-					  console.log(questionsObj);
 					  var fixedQuestionsObj = fixQuestionsObj(questionsObj);
-						deferred.resolve(fixedQuestionsObj); //not sure about this syntax
+					  var questionsObj2 = getCodingQuestionsPt1(data, questionsObj);
+					  console.log('questionsObj2: ' + questionsObj2);
+					  var questionsObj3 = getCodingQuestionsPt2(data, questionsObj2);
+					  console.log('questionsObj3: ' + questionsObj3);
+//TODO figure out how to parse the coding questions from data <p><pre>
+//f1 get the contents of <p><em> expect 6
+//f2 get contents of <html><pre> expect 6
+//somehow combine f1 and f2 maybe [[f1 node list], [f2 node list]] and assign to the question set for coding questions
+//wonder if I should somehow differentiate between coding questions and the other types of questions since you can't iterate the same way
+						deferred.resolve(questionsObj3); //not sure about this syntax
 					})
 					.error(function(err) {
 						deferred.reject(err);
