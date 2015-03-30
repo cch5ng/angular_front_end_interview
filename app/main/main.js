@@ -117,12 +117,14 @@ angular.module('myApp.main', ['ngSanitize']).
 
 		function getCodingQuestionsPt2(data, questionsObj) {
 			var updatedQuestionsObj = questionsObj.slice(0);
+			var trimmedQuestionsObj = [];
 
-			var codingQuestionsList2 = $(data).find('pre > code');
-			console.log('codingQuestionsList2: ' + codingQuestionsList2[0].innerHTML);
-			console.log('codingQuestionsList2: ' + codingQuestionsList2[1].innerHTML);
-			console.log('codingQuestionsList2: ' + codingQuestionsList2[5].innerHTML);
-			updatedQuestionsObj[6].questionsPt2 = codingQuestionsList2; //nodelist
+			var codingQuestionsList2 = $(data).find('body pre > code');
+			trimmedQuestionsObj = codingQuestionsList2.slice(1); //fixing issue where code sample from a different category was getting included
+			console.log('codingQuestionsList2: ' + trimmedQuestionsObj[0].innerHTML);
+			console.log('codingQuestionsList2: ' + trimmedQuestionsObj[1].innerHTML);
+			console.log('codingQuestionsList2: ' + trimmedQuestionsObj[5].innerHTML);
+			updatedQuestionsObj[6].questionsPt2 = trimmedQuestionsObj; //nodelist
 			return updatedQuestionsObj;
 		}
 
@@ -139,10 +141,6 @@ angular.module('myApp.main', ['ngSanitize']).
 					  console.log('questionsObj2: ' + questionsObj2);
 					  var questionsObj3 = getCodingQuestionsPt2(data, questionsObj2);
 					  console.log('questionsObj3: ' + questionsObj3);
-//TODO figure out how to parse the coding questions from data <p><pre>
-//f1 get the contents of <p><em> expect 6
-//f2 get contents of <html><pre> expect 6
-//somehow combine f1 and f2 maybe [[f1 node list], [f2 node list]] and assign to the question set for coding questions
 //wonder if I should somehow differentiate between coding questions and the other types of questions since you can't iterate the same way
 						deferred.resolve(questionsObj3); //not sure about this syntax
 					})
