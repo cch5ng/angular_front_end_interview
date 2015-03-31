@@ -19,6 +19,18 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+
+  <style>
+    pre {
+      font-size: 1rem;
+      padding: .66001rem 9.5px 9.5px;
+      line-height: 2rem;
+      background: -webkit-linear-gradient(top,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
+      background: linear-gradient(to bottom,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
+      background-size: 100% 4rem;
+      border-color: #D3DAEA;
+    }
+  </style>
 </head>
 <body ng-controller="interviewFormCtrl">
   <!--
@@ -103,6 +115,11 @@
       <div class="questions" ng-repeat="questionSet in randomQuestionsByCateg">
         <ccr-questions></ccr-questions>
       </div>
+
+      <div class="questions" > <!-- ng-repeat="questionSet in randomQuestionsByCateg" -->
+        <ccr-coding-questions></ccr-coding-questions>
+      </div>
+
 
 <!--     <div ng-view></div>
 
