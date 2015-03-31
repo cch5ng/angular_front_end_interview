@@ -278,6 +278,7 @@ angular.module('myApp.main', ['ngSanitize']).
 			$scope.codingCount = 0;
 			$scope.funCount = 0;
 			$scope.randomQuestionsByCateg = [];
+			$scope.randomCodingQuestions = {};
 		};
 
 	}]).
