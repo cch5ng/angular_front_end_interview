@@ -160,7 +160,7 @@ angular.module('myApp.main', ['ngSanitize']).
 		$scope.htmlCount = 0;
 		$scope.cssCount = 0;
 		$scope.jsCount = 0;
-		$scope.jqueryCount = 0;
+		$scope.networkCount = 0;
 		$scope.funCount = 0;
 		$scope.codingCount = 0;
 
@@ -224,7 +224,7 @@ angular.module('myApp.main', ['ngSanitize']).
 		$scope.randomQuestionsAr = function() {
 			var randomQuestions = [];
 			$scope.randomCodingQuestions = {};
-			$scope.requestedQuestions = [$scope.genCount, $scope.htmlCount, $scope.cssCount, $scope.jsCount, $scope.jqueryCount, $scope.funCount, $scope.codingCount];
+			$scope.requestedQuestions = [$scope.genCount, $scope.htmlCount, $scope.cssCount, $scope.jsCount, $scope.networkCount, $scope.funCount, $scope.codingCount];
 			console.log('length $scope.requestedQuestions: ' + $scope.requestedQuestions.length);
 
 			for (var i = 0; i < $scope.requestedQuestions.length - 1; i++) { //processing all question categories before coding questions
@@ -274,7 +274,7 @@ angular.module('myApp.main', ['ngSanitize']).
 			$scope.htmlCount = 0;
 			$scope.cssCount = 0;
 			$scope.jsCount = 0;
-			$scope.jqueryCount = 0;
+			$scope.networkCount = 0;
 			$scope.codingCount = 0;
 			$scope.funCount = 0;
 			$scope.randomQuestionsByCateg = [];
