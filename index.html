@@ -22,55 +22,71 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
 
   <style>
-    h4 {
-      font-size: 18px;
-    }
+    @media screen {
 
-    pre {
-      font-size: 14px; /* 1rem*/
-      padding: .66001rem 9.5px 9.5px;
-      line-height: 2rem;
-      background: -webkit-linear-gradient(top,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
-      background: linear-gradient(to bottom,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
-      background-size: 100% 4rem;
-      border-color: #D3DAEA;
-    }
+      h4 {
+        font-size: 18px;
+      }
 
-    .navbar-inverse {
-      background-color: #2E9285; /*#222;*/
-      border-color: #429c91; /*#24746a; #080808;*/
-    }
+      pre {
+        font-size: 14px; /* 1rem*/
+        padding: .66001rem 9.5px 9.5px;
+        line-height: 2rem;
+        background: -webkit-linear-gradient(top,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
+        background: linear-gradient(to bottom,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
+        background-size: 100% 4rem;
+        border-color: #D3DAEA;
+      }
 
-    .navbar-inverse .navbar-brand {
-      color: #323232; /*#9d9d9d;*/
-      font-family: 'Alegreya Sans SC', sans-serif;
-      font-size: 28px;
-    }
+      .navbar-inverse {
+        background-color: #2E9285; /*#222;*/
+        border-color: #429c91; /*#24746a; #080808;*/
+      }
 
-    .navbar-inverse .navbar-nav>li>a {
-      color: #323232; /*#9d9d9d;*/
-    }
+      .navbar-inverse .navbar-brand {
+        color: #323232; /*#9d9d9d;*/
+        font-family: 'Alegreya Sans SC', sans-serif;
+        font-size: 28px;
+      }
 
-    .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
-      color: #fff;
-      background-color: #2E9285;; /*#429c91;*/
-      border-bottom: 3px solid #ccc;
-    }
+      .navbar-inverse .navbar-nav>li>a {
+        color: #323232; /*#9d9d9d;*/
+      }
 
-    .container2, .content {
-      padding: 70px 5px 0 5px;
-      clear: both;
-    }
+      .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+        color: #fff;
+        background-color: #2E9285;; /*#429c91;*/
+        border-bottom: 3px solid #ccc;
+      }
 
-    .navbar-collapse {
-      float: right;
-    }
-
-    @media (min-width: 760px) {
       .container2, .content {
-        padding: 70px 50px;
+        padding: 70px 5px 0 5px;
         clear: both;
       }
+
+      .navbar-collapse {
+        float: right;
+      }
+
+      @media (min-width: 760px) {
+        .container2, .content {
+          padding: 70px 50px;
+          clear: both;
+        }
+      }
+
+    }
+
+    @media print {
+      nav, form {
+        display: none;
+      }
+
+/* TODO this is only practical if the application is enhanced to enable printing a short list of questions
+      li {
+        padding-bottom: 35px;
+      }
+*/
     }
 
   </style>
