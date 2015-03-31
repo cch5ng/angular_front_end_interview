@@ -148,7 +148,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		};
 	}]).
 
-	controller('interviewFormCtrl', ['$scope', '$q', 'dataCollection', function($scope, $q, dataCollection) {
+	controller('interviewFormCtrl', ['$scope', '$q', '$location', 'dataCollection', function($scope, $q, $location, dataCollection) {
 		var promise = dataCollection.getQuestionsArray();
 
 		$scope.genCount = 0;
@@ -271,6 +271,14 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 			$scope.randomQuestionsByCateg = [];
 			$scope.randomCodingQuestions = {};
 		};
+
+		$scope.getClass = function(path) {
+	    if ($location.path().substr(0, path.length) == path) {
+	      return "active"
+	    } else {
+	      return ""
+	    }
+		}
 
 	}]).
 
