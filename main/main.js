@@ -286,7 +286,7 @@ angular.module('myApp.main', ['ngSanitize']).
 	directive('ccrQuestions', function() {
 		return {
 			restrict: 'E',
-			templateUrl: 'ccr-questions.html'
+			templateUrl: 'main/ccr-questions.html'
 		};
 
 	}).
@@ -294,7 +294,7 @@ angular.module('myApp.main', ['ngSanitize']).
 	directive('ccrCodingQuestions', function() {
 		return {
 			restrict: 'E',
-			templateUrl: 'ccr-coding-questions.html'
+			templateUrl: 'main/ccr-coding-questions.html'
 		};
 
 	});
