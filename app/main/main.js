@@ -184,6 +184,9 @@ angular.module('myApp.main', ['ngSanitize']).
 		  return Math.floor(Math.random() * (max - min)) + min;
 		}
 
+//may refactor this so all I do is put in the requested number of random numbers and the total number of questions
+//then just get back a list of random numbers (index values for the questions list)
+//that is a little simpler
 		function getRandomQuestions(categoryNum, questionsCount) {
 			var randomQuestionsList = [];
 			var questionIndices = [];
@@ -204,29 +207,66 @@ angular.module('myApp.main', ['ngSanitize']).
 			return randomQuestionsList;
 		}
 
+		function getRandomCodingIndices(questionsCount) {
+			var questionIndices = [];
+
+			for (var i = 0; i < questionsCount; i++) {
+				var randomIdx = getRandomInt(0, $scope.max_num7);
+				while (questionIndices.indexOf(randomIdx) >= 0) {
+					randomIdx = getRandomInt(0, $scope.max_num7);
+				}
+				questionIndices.push(randomIdx);
+			}
+
+			return questionIndices;
+		}
+
 		$scope.randomQuestionsAr = function() {
 			var randomQuestions = [];
+			$scope.randomCodingQuestions = {};
 			$scope.requestedQuestions = [$scope.genCount, $scope.htmlCount, $scope.cssCount, $scope.jsCount, $scope.jqueryCount, $scope.funCount, $scope.codingCount];
 			console.log('length $scope.requestedQuestions: ' + $scope.requestedQuestions.length);
 
-			for (var i = 0; i < $scope.requestedQuestions.length; i++) {
+			for (var i = 0; i < $scope.requestedQuestions.length - 1; i++) { //processing all question categories before coding questions
 				var categorySet = {};
-
-				console.log('$scope.requestedQuestions[i]: ' + $scope.requestedQuestions[i]);
+				//console.log('$scope.requestedQuestions[i]: ' + $scope.requestedQuestions[i]);
 
 				if ($scope.requestedQuestions[i] > 0) {
-					console.log('entered this loop');
+					//console.log('entered this loop');
 					categorySet.category = $scope.questionsObj[i].category;
-					console.log('categorySet.category: ' + categorySet.category);
+					//console.log('categorySet.category: ' + categorySet.category);
 					categorySet.questions = getRandomQuestions(i, $scope.requestedQuestions[i]);
-					console.log('categorySet.questions: ' + categorySet.questions);
+					//console.log('categorySet.questions: ' + categorySet.questions);
 					randomQuestions.push(categorySet);
 				}
+			}
+
+//TODO process and add coding questions to list
+			if ($scope.codingCount > 0) {
+				$scope.randomCodingQuestions.category = $scope.questionsObj[6].category;
+				var randomIndices = getRandomCodingIndices($scope.codingCount);
+				var codeQuestionsList = [];
+
+				for (var j = 0; j < randomIndices.length; j++) {
+					var questionSet = [];
+					questionSet.push($scope.questionsObj[6].questionsPt1[randomIndices[j]].innerHTML);
+					//console.log('questionSet.part1: ' + questionSet.part1);
+					questionSet.push($scope.questionsObj[6].questionsPt2[randomIndices[j]].innerHTML);
+					codeQuestionsList.push(questionSet);
+				}
+
+				$scope.randomCodingQuestions.questions = codeQuestionsList;
+				console.log('length $scope.randomCodingQuestions.questions: ' + $scope.randomCodingQuestions.questions.length);
+
+				//$scope.randomCodingQuestions.questionsPt1 = $scope.questionsObj[6].questionsPt1;
+				//$scope.randomCodingQuestions.questionsPt2 = $scope.questionsObj[6].questionsPt2;
 			}
 
 			//console.log('categorySet: ' + $scope.categorySet);
 			console.log('randomQuestions: ' + randomQuestions);
 			$scope.randomQuestionsByCateg = randomQuestions;
+
+			console.log('randomCodingQuestions: ' + $scope.randomCodingQuestions);
 		};
 
 		$scope.clear = function() {
@@ -246,6 +286,14 @@ angular.module('myApp.main', ['ngSanitize']).
 		return {
 			restrict: 'E',
 			templateUrl: 'ccr-questions.html'
+		};
+
+	}).
+
+	directive('ccrCodingQuestions', function() {
+		return {
+			restrict: 'E',
+			templateUrl: 'ccr-coding-questions.html'
 		};
 
 	});
