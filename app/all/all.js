@@ -33,7 +33,20 @@ angular.module('myApp.all', ['ngRoute'])
 	}
 
 	function getInnerHTMLCoding(response) {
-		var readableQuestions = [];
+		var readableQuestions = {};
+		var questionsPt1HTML = []; //to store innerHTML of coding questions part 1 and part 2
+		var questionsPt2HTML = []; //to store innerHTML of coding questions part 1 and part 2
+		var questionsSet = [];
+
+		readableQuestions.category = response[6].category;
+		for (var i = 0; i < response[6].questionsPt1.length; i++) {
+			var thisQuestion = [];
+		 	thisQuestion.push(response[6].questionsPt1[i].innerHTML);
+			thisQuestion.push(response[6].questionsPt2[i].innerHTML);
+			questionsSet.push(thisQuestion);
+		 }
+
+		readableQuestions.questions = questionsSet;
 
 		return readableQuestions;
 	}
@@ -41,7 +54,7 @@ angular.module('myApp.all', ['ngRoute'])
 
 	promise.then(function(response) {
 		$scope.questionsObjAll = getInnerHTML(response);
-		//$scope.questionsObjCoding = getInnerHTMLCoding(response);
+		$scope.randomCodingQuestions = getInnerHTMLCoding(response);
 		console.log('controllers $scope.questionsObj: ' + $scope.questionsObjAll);
 	}, function(error) {
 		console.log('error: ' + error);
