@@ -1,6 +1,14 @@
 'use strict';
 
-angular.module('myApp.main', ['ngSanitize']).
+angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
+	config(['$routeProvider', function($routeProvider) {
+	  $routeProvider.when('/main', {
+	    templateUrl: 'main/main.html',
+	    controller: 'interviewFormCtrl'
+	  });
+	}]).
+
+
 	factory('dataCollection', ['$http', '$q', function($http, $q) {
 		var deferred = $q.defer();
 		var interviewUrl = '/app/src/h5bp_readme.html';
