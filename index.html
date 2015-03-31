@@ -27,7 +27,7 @@
     }
 
     pre {
-      font-size: 1rem;
+      font-size: 14px; /* 1rem*/
       padding: .66001rem 9.5px 9.5px;
       line-height: 2rem;
       background: -webkit-linear-gradient(top,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
@@ -91,9 +91,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#/main">Random Test</a></li>
-            <li><a href="#/all">All Questions</a></li>
-            <li><a href="#/about">About</a></li>
+            <li ng-class="getClass('/main')"><a href="#/main">Random Test</a></li> <!-- class="active" -->
+            <li ng-class="getClass('/all')"><a href="#/all">All Questions</a></li>
+            <li ng-class="getClass('/about')"><a href="#/about">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
