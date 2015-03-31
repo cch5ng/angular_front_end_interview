@@ -4,7 +4,7 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.main',
-//  'myApp.view1',
+  'myApp.all',
   'myApp.about',
   'myApp.version'
 ]).
