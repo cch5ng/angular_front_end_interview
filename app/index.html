@@ -30,9 +30,54 @@
       background-size: 100% 4rem;
       border-color: #D3DAEA;
     }
+
+    .navbar-inverse {
+      background-color: #2E9285; /*#222;*/
+      border-color: #429c91; /*#24746a; #080808;*/
+    }
+
+    .navbar-inverse .navbar-brand {
+      color: #323232; /*#9d9d9d;*/
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+      color: #323232; /*#9d9d9d;*/
+    }
+
+    .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+      color: #fff;
+      background-color: #429c91;
+    }
+
+    .container2 {
+      padding-top: 70px;
+    }
+
   </style>
 </head>
 <body ng-controller="interviewFormCtrl">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Front End Web Test</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">All Questions</a></li>
+            <li><a href="#contact">Random Test</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
   <!--
   <ul class="menu">
     <li><a href="#/view1">view1</a></li>
@@ -44,10 +89,11 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div class="container">
+  <div class="container2">
 
-  <h2>Front End Technical Interview</h2>
-      <form class="form-horizontal" ng-cloak class="ng-cloak">
+<!--   <h2>Front End Technical Interview</h2>
+ -->      
+        <form class="form-horizontal" ng-cloak class="ng-cloak">
           <div class="form-group">
               <label for="genCount" class="col-sm-3 control-label">Number of General Questions</label>
               <div class="col-sm-9">
