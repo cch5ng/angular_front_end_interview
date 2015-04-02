@@ -11,9 +11,9 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 
 	factory('dataCollection', ['$http', '$q', function($http, $q) {
 		var deferred = $q.defer();
-		var interviewUrl = '/app/src/h5bp_readme.html';
-		//var interviewUrl = 'https://h5bp.github.io/Front-end-Developer-Interview-Questions';//
-		//var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview/h5bp_readme.html';
+		var interviewUrl = '/app/src/h5bp_readme.html'; //this url for dev
+		//next url for production
+		//var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview/src/h5bp_readme.html';
 
 		//helper function
 
@@ -99,30 +99,37 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 			return fixQuestionsObj;
 		}
 
+		/**
+		 * @param data {html document} result of http get for html page with the parsed markdown (local to this project)
+		 * @param questionsObj [{category: 'categ', questions: [li node list]}, {}, ...] latest version of the set of categories and 
+		   		related questions 
+		 * updates the array of question list sets so that the first part of coding questions is added as a node list
+		 *    this is only the question without the code section
+		 */
 		function getCodingQuestionsPt1(data, questionsObj) {
 			var updatedQuestionsObj = questionsObj.slice(0);
 
 			var codingQuestionsList1 = $(data).find('p > em');
-			//console.log('codingQuestionsList1: ' + codingQuestionsList1[0].innerHTML);
-			//console.log('codingQuestionsList1: ' + codingQuestionsList1[1].innerHTML);
-			//console.log('codingQuestionsList1: ' + codingQuestionsList1[5].innerHTML);
 			updatedQuestionsObj[6].questionsPt1 = codingQuestionsList1; //nodelist
 			return updatedQuestionsObj;
 		}
 
+		/**
+		 * @param data {html document} result of http get for html page with the parsed markdown (local to this project)
+		 * @param questionsObj [{category: 'categ', questions: [li node list]}, {}, ...] latest version of the set of categories and 
+		   		related questions 
+		 * updates the array of question list sets so that the 2nd part of coding questions is added as a node list
+		 *    this is only code section
+		 */
 		function getCodingQuestionsPt2(data, questionsObj) {
 			var updatedQuestionsObj = questionsObj.slice(0);
 			var trimmedQuestionsObj = [];
 
 			var codingQuestionsList2 = $(data).find('body pre > code');
 			trimmedQuestionsObj = codingQuestionsList2.slice(1); //fixing issue where code sample from a different category was getting included
-			//console.log('codingQuestionsList2: ' + trimmedQuestionsObj[0].innerHTML);
-			//console.log('codingQuestionsList2: ' + trimmedQuestionsObj[1].innerHTML);
-			//console.log('codingQuestionsList2: ' + trimmedQuestionsObj[5].innerHTML);
 			updatedQuestionsObj[6].questionsPt2 = trimmedQuestionsObj; //nodelist
 			return updatedQuestionsObj;
 		}
-
 
 		return {
 			getQuestionsArray: function() {
@@ -131,11 +138,10 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 						var categoriesAr = getCategories(data);
 					  var questionsAr = getAllQuestions(data);
 					  var questionsObj = buildObj(categoriesAr, questionsAr);
-					  var fixedQuestionsObj = fixQuestionsObj(questionsObj);
-					  var questionsObj2 = getCodingQuestionsPt1(data, questionsObj);
-					  //console.log('questionsObj2: ' + questionsObj2);
+					  var fixedQuestionsObj = fixQuestionsObj(questionsObj); //have to swap the order of categories (fun and coding)
+
+					  var questionsObj2 = getCodingQuestionsPt1(data, fixedQuestionsObj); //questionsObj
 					  var questionsObj3 = getCodingQuestionsPt2(data, questionsObj2);
-					  //console.log('questionsObj3: ' + questionsObj3);
 //wonder if I should somehow differentiate between coding questions and the other types of questions since you can't iterate the same way
 						deferred.resolve(questionsObj3); //not sure about this syntax
 					})
@@ -232,7 +238,6 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 				}
 			}
 
-//TODO process and add coding questions to list
 			if ($scope.codingCount > 0) {
 				$scope.randomCodingQuestions.category = $scope.questionsObj[6].category;
 				var randomIndices = getRandomCodingIndices($scope.codingCount);
@@ -241,23 +246,16 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 				for (var j = 0; j < randomIndices.length; j++) {
 					var questionSet = [];
 					questionSet.push($scope.questionsObj[6].questionsPt1[randomIndices[j]].innerHTML);
-					//console.log('questionSet.part1: ' + questionSet.part1);
 					questionSet.push($scope.questionsObj[6].questionsPt2[randomIndices[j]].innerHTML);
 					codeQuestionsList.push(questionSet);
 				}
 
 				$scope.randomCodingQuestions.questions = codeQuestionsList;
-				//console.log('length $scope.randomCodingQuestions.questions: ' + $scope.randomCodingQuestions.questions.length);
-
-				//$scope.randomCodingQuestions.questionsPt1 = $scope.questionsObj[6].questionsPt1;
-				//$scope.randomCodingQuestions.questionsPt2 = $scope.questionsObj[6].questionsPt2;
 			}
 
-			//console.log('categorySet: ' + $scope.categorySet);
-			//console.log('randomQuestions: ' + randomQuestions);
 			$scope.randomQuestionsByCateg = randomQuestions;
 
-			console.log('randomCodingQuestions: ' + $scope.randomCodingQuestions);
+			//console.log('randomCodingQuestions: ' + $scope.randomCodingQuestions);
 		};
 
 		$scope.clear = function() {
