@@ -39,28 +39,28 @@
       }
 
       .navbar-inverse {
-        background-color: #2E9285; /*#222;*/
-        border-color: #429c91; /*#24746a; #080808;*/
+        background-color: #2E9285;
+        border-color: #429c91;
       }
 
       .navbar-inverse .navbar-brand {
-        color: #323232; /*#9d9d9d;*/
+        color: #323232;
         font-family: 'Alegreya Sans SC', sans-serif;
         font-size: 28px;
       }
 
       .navbar-inverse .navbar-nav>li>a {
-        color: #323232; /*#9d9d9d;*/
+        color: #323232;
       }
 
       .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
         color: #fff;
-        background-color: #2E9285;; /*#429c91;*/
+        background-color: #2E9285;
         border-bottom: 3px solid #ccc;
       }
 
       .container2, .content {
-        padding: 70px 5px 0 5px;
+        padding: 110px 5px 0 5px;
         clear: both;
       }
 
@@ -68,7 +68,7 @@
         float: right;
       }
 
-      @media (min-width: 760px) {
+      @media (min-width: 815px) {
         .container2, .content {
           padding: 70px 50px;
           clear: both;
@@ -106,30 +106,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ng-class="getClass('/main')"><a href="#/main">Random Test</a></li> <!-- class="active" -->
+            <li ng-class="getClass('/main')"><a href="#/main">Random Test</a></li>
             <li ng-class="getClass('/all')"><a href="#/all">All Questions</a></li>
             <li ng-class="getClass('/about')"><a href="#/about">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-  <!--
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
--->
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-<div class="content" ng-view></div>
+  <div class="content" ng-view></div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <!--<script src="bower_components/angular/angular.js"></script> -->
   <script src="js/angular-route.min.js"></script>
   <script src="js/angular-route.min.js.map"></script>
   <script src="js/angular-sanitize.min.js"></script>
