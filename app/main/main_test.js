@@ -1,16 +1,40 @@
 'use strict';
 
-describe('myApp.view1 module', function() {
+describe('myApp.main module', function() {
 
-  beforeEach(module('myApp.view1'));
+  beforeEach(module('myApp.main'));
 
-  describe('view1 controller', function(){
+  describe('main controller', function(){
 
     it('should ....', inject(function($controller) {
       //spec body
-      var view1Ctrl = $controller('View1Ctrl');
-      expect(view1Ctrl).toBeDefined();
+      var myInterviewFormCtrl = $controller('interviewFormCtrl');
+      expect(myInterviewFormCtrl).toBeDefined();
     }));
 
   });
+
+////
+
+	var dataCollection;
+
+	beforeEach(inject(function(_dataCollection_) {
+		dataCollection = _dataCollection_;
+	}));
+
+	describe('fixQuestionsObj method', function() {
+			var updatedCategoriesAr;
+
+		beforeEach(function() {
+			var categoriesAr = [{category: 'General Questions'}, {category: 'HTML Questions'}, {category: 'CSS Questions'}, {category: 'Javascript Questions'}, {category: 'Network Questions'}, {category: 'Coding Questions'}, {category: 'Fun Questions'}];
+			updatedCategoriesAr = dataCollection.fixQuestionsObj(categoriesAr);
+		});
+
+		it('should swap the categories, Fun Questions and Coding Questions', function() {
+			expect(updatedCategoriesAr[5].category.toBe('Fun Questions'));
+			expect(updatedCategoriesAr[6].category.toBe('Coding Questions'));
+		});
+
+	});
+
 });
