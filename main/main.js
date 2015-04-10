@@ -23,7 +23,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		 *
 		 */
 		function getCategories(data) {  //alt could get this via <h4> but drop the last one for contributors; probably <h4> is more stable than the current selector?
-		  var categoryList = $(data).find('ol:nth-of-type(1)');
+		  var categoryList = angular.element(data).find('ol:nth-of-type(1)'); //$(data)
 		  var categoryStr = categoryList[0].innerText;//innerHTML
 
 		  return parseList(categoryStr);
@@ -38,8 +38,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		 */
 		function parseList(str) {
 		  var cleanList = [];
-		  
-		  //console.log(str);
+
 		  var trimmedStr = str.trim();
 		  cleanList = str.split("\n");
 		  cleanList = cleanList.slice(1); //removes first empty line
@@ -55,7 +54,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		 *     sets matches the order of categories from getCategories()
 		 */
 		function getAllQuestions(data) {
-		  var allLists = $(data).find('body').children('ul'); // // 
+		  var allLists = angular.element(data).find('body').children('ul'); // $(data)
 		  var allListsLength = allLists.length;
 		  var questionsListByCategory = [];
 
@@ -109,7 +108,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		function getCodingQuestionsPt1(data, questionsObj) {
 			var updatedQuestionsObj = questionsObj.slice(0);
 
-			var codingQuestionsList1 = $(data).find('p > em');
+			var codingQuestionsList1 = angular.element(data).find('p > em'); //$(data)
 			updatedQuestionsObj[6].questionsPt1 = codingQuestionsList1; //nodelist
 			return updatedQuestionsObj;
 		}
@@ -125,7 +124,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 			var updatedQuestionsObj = questionsObj.slice(0);
 			var trimmedQuestionsObj = [];
 
-			var codingQuestionsList2 = $(data).find('body pre > code');
+			var codingQuestionsList2 = angular.element(data).find('body pre > code'); //$(data)
 			trimmedQuestionsObj = codingQuestionsList2.slice(1); //fixing issue where code sample from a different category was getting included
 			updatedQuestionsObj[6].questionsPt2 = trimmedQuestionsObj; //nodelist
 			return updatedQuestionsObj;
@@ -167,7 +166,6 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 
 		promise.then(function(response) {
 			$scope.questionsObj = response;
-			console.log('controllers $scope.questionsObj: ' + $scope.questionsObj);
 			$scope.max_num1 = $scope.questionsObj[0].questions.length;
 			$scope.max_num2 = $scope.questionsObj[1].questions.length;
 			$scope.max_num3 = $scope.questionsObj[2].questions.length;
@@ -200,8 +198,6 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 	        questionIndices.push(randomIdx);
 //TODO maybe this helps resolve browser hanging
 	        var question = $scope.questionsObj[categoryNum].questions[randomIdx].innerHTML;
-	        //var question = questionsAr[0].questions[randomIdx];
-	        console.log(question);
 	        randomQuestionsList.push(question);
 	    }
 
@@ -226,7 +222,6 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 			var randomQuestions = [];
 			$scope.randomCodingQuestions = {};
 			$scope.requestedQuestions = [$scope.genCount, $scope.htmlCount, $scope.cssCount, $scope.jsCount, $scope.networkCount, $scope.funCount, $scope.codingCount];
-			console.log('length $scope.requestedQuestions: ' + $scope.requestedQuestions.length);
 
 			for (var i = 0; i < $scope.requestedQuestions.length - 1; i++) { //processing all question categories before coding questions
 				var categorySet = {};
@@ -254,8 +249,6 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 			}
 
 			$scope.randomQuestionsByCateg = randomQuestions;
-
-			//console.log('randomCodingQuestions: ' + $scope.randomCodingQuestions);
 		};
 
 		$scope.clear = function() {
