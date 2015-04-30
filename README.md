@@ -13,6 +13,8 @@
 ## How to deploy
 
 * Use the instructions from https://gist.github.com/cobyism/4730490 to create a gh-pages branch based on the subdirectory, \app
+  * Delete the current gh-pages branch from github
+  * /# git subtree push --prefix app origin gh-pages
 
 ## Caveats
 
