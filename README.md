@@ -10,6 +10,10 @@
   * Ability to prioritize favorite questions (like from easiest to hardest, or other)
   * If you have additional suggestions, please open an issue/feature request
 
+## How to deploy
+
+* Use the instructions from https://gist.github.com/cobyism/4730490 to create a gh-pages branch based on the subdirectory, \app
+
 ## Caveats
 
 * In the current form, as a web scraper, this source code is extremely brittle and if the original questions source contributors decide to change the format of their source html page, this application may break
