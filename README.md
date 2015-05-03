@@ -11,7 +11,10 @@
   * If you have additional suggestions, please open an issue/feature request
 
 ## How to deploy
-
+* Periodically I am manually getting the latest h5bp README.mdn file contents to use as the source for this application's data. It appears to get updated once every couple of months.
+  * Get the raw markdown contents from https://raw.githubusercontent.com/h5bp/Front-end-Developer-Interview-Questions/master/README.md
+  * Run the markdown file contents through the site, dillinger.io, and export the output to unstyled HTML.
+  * Rename the resulting HTML file to h5bp_readme.html and place that file in this project's app/src folder.
 * Use the instructions from https://gist.github.com/cobyism/4730490 to create a gh-pages branch based on the subdirectory, \app
   * Delete the current gh-pages branch from github
   * \# git subtree push --prefix app origin gh-pages
