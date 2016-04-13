@@ -2,16 +2,16 @@
 
 angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 	config(['$routeProvider', function($routeProvider) {
-	  $routeProvider.when('/main', {
-	    templateUrl: 'main/main.html',
-	    controller: 'interviewFormCtrl'
-	  });
+		$routeProvider.when('/main', {
+			templateUrl: 'main/main.html',
+			controller: 'interviewFormCtrl'
+		});
 	}]).
 
 
 	factory('dataCollection', ['$http', '$q', function($http, $q) {
 		var deferred = $q.defer();
-		var interviewUrl = '/app/src/h5bp_readme.html'; //this url for dev
+		var interviewUrl = 'http://carolchung.com/src/h5bp_readme.html'; //this url for dev
 		//next url for production
 		//var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview/src/h5bp_readme.html';
 
@@ -23,10 +23,14 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		 *
 		 */
 		function getCategories(data) {  //alt could get this via <h4> but drop the last one for contributors; probably <h4> is more stable than the current selector?
-		  var categoryList = angular.element(data).find('ol:nth-of-type(1)'); //$(data)
-		  var categoryStr = categoryList[0].innerText;//innerHTML
+//TODO getting data in the test
+			var categoryList = angular.element(data).find('ol:nth-of-type(1)'); //$(data)
+//TODO not getting any category list in the test
+			console.log('categoryList: ' + categoryList)
+			var categoryStr = categoryList[0].innerText;//innerHTML
+			console.log('categoryStr: ' + categoryStr);
 
-		  return parseList(categoryStr);
+			return parseList(categoryStr);
 		}
 
 		/**
@@ -37,14 +41,14 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		 *     this will result in empty strings in the resulting array
 		 */
 		function parseList(str) {
-		  var cleanList = [];
+			var cleanList = [];
 
-		  var trimmedStr = str.trim();
-		  cleanList = str.split("\n");
-		  cleanList = cleanList.slice(1); //removes first empty line
-		  cleanList.pop(); //removes last empty line
+			var trimmedStr = str.trim();
+			cleanList = str.split("\n");
+			cleanList = cleanList.slice(1); //removes first empty line
+			cleanList.pop(); //removes last empty line
 
-		  return cleanList;
+			return cleanList;
 		}
 
 		/**
@@ -54,15 +58,15 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		 *     sets matches the order of categories from getCategories()
 		 */
 		function getAllQuestions(data) {
-		  var allLists = angular.element(data).find('body').children('ul'); // $(data)
-		  var allListsLength = allLists.length;
-		  var questionsListByCategory = [];
+			var allLists = angular.element(data).find('body').children('ul'); // $(data)
+			var allListsLength = allLists.length;
+			var questionsListByCategory = [];
 
-		  for (var i = 0; i < allLists.length; i++) {
-		    questionsListByCategory.push($(allLists[i]).children('li'));
-		  }
+			for (var i = 0; i < allLists.length; i++) {
+				questionsListByCategory.push($(allLists[i]).children('li'));
+			}
 
-		  return questionsListByCategory;
+			return questionsListByCategory;
 		}
 
 		/**
@@ -72,17 +76,17 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		 *     and array of corresponding questions
 		 */
 		function buildObj(categoriesAr, questionsAr) {
-		  var questionsArResult = [];
-		  
-		  var numCategories = categoriesAr.length;
-		  var name = 'category';
-		  for (var i = 0; i < numCategories; i++) {
-		    var questionsObj = {};
-		    questionsObj.category = categoriesAr[i];
-		    questionsObj.questions = questionsAr[i];
-		    questionsArResult.push(questionsObj);
-		  }
-		  return questionsArResult;
+			var questionsArResult = [];
+			
+			var numCategories = categoriesAr.length;
+			var name = 'category';
+			for (var i = 0; i < numCategories; i++) {
+				var questionsObj = {};
+				questionsObj.category = categoriesAr[i];
+				questionsObj.questions = questionsAr[i];
+				questionsArResult.push(questionsObj);
+			}
+			return questionsArResult;
 		}
 
 		/**
@@ -101,7 +105,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		/**
 		 * @param data {html document} result of http get for html page with the parsed markdown (local to this project)
 		 * @param questionsObj [{category: 'categ', questions: [li node list]}, {}, ...] latest version of the set of categories and 
-		   		related questions 
+					related questions 
 		 * updates the array of question list sets so that the first part of coding questions is added as a node list
 		 *    this is only the question without the code section
 		 */
@@ -116,7 +120,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		/**
 		 * @param data {html document} result of http get for html page with the parsed markdown (local to this project)
 		 * @param questionsObj [{category: 'categ', questions: [li node list]}, {}, ...] latest version of the set of categories and 
-		   		related questions 
+					related questions 
 		 * updates the array of question list sets so that the 2nd part of coding questions is added as a node list
 		 *    this is only code section
 		 */
@@ -135,12 +139,12 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 				$http.get(interviewUrl , {responseType: 'document'})
 					.success(function(data, status, headers) {
 						var categoriesAr = getCategories(data);
-					  var questionsAr = getAllQuestions(data);
-					  var questionsObj = buildObj(categoriesAr, questionsAr);
-					  var fixedQuestionsObj = fixQuestionsObj(questionsObj); //have to swap the order of categories (fun and coding)
+						var questionsAr = getAllQuestions(data);
+						var questionsObj = buildObj(categoriesAr, questionsAr);
+						var fixedQuestionsObj = fixQuestionsObj(questionsObj); //have to swap the order of categories (fun and coding)
 
-					  var questionsObj2 = getCodingQuestionsPt1(data, fixedQuestionsObj); //questionsObj
-					  var questionsObj3 = getCodingQuestionsPt2(data, questionsObj2);
+						var questionsObj2 = getCodingQuestionsPt1(data, fixedQuestionsObj); //questionsObj
+						var questionsObj3 = getCodingQuestionsPt2(data, questionsObj2);
 //wonder if I should somehow differentiate between coding questions and the other types of questions since you can't iterate the same way
 						deferred.resolve(questionsObj3); //not sure about this syntax
 					})
@@ -149,7 +153,14 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 						console.log('error: ' + err);
 					});
 					return deferred.promise; //ask about this (why should it make a difference where you return from, under success or here?)
+			},
+			getCategories: function(data) {
+					return getCategories(data);
+			},
+			parseList: function(str) {
+					return parseList(str);
 			}
+			//getAllQuestions: getAllQuestions(data)
 		};
 	}]).
 
@@ -180,7 +191,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 
 		//helper functions
 		function getRandomInt(min, max) {
-		  return Math.floor(Math.random() * (max - min)) + min;
+			return Math.floor(Math.random() * (max - min)) + min;
 		}
 
 //may refactor this so all I do is put in the requested number of random numbers and the total number of questions
@@ -191,15 +202,15 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 			var questionIndices = [];
 
 			for (var i = 0; i < questionsCount; i++) {
-	        var randomIdx = getRandomInt(0, $scope.maxNumAr[categoryNum]);
-	        while (questionIndices.indexOf(randomIdx) >= 0) {
-	            randomIdx = getRandomInt(0, $scope.maxNumAr[categoryNum]);
-	        }
-	        questionIndices.push(randomIdx);
+					var randomIdx = getRandomInt(0, $scope.maxNumAr[categoryNum]);
+					while (questionIndices.indexOf(randomIdx) >= 0) {
+							randomIdx = getRandomInt(0, $scope.maxNumAr[categoryNum]);
+					}
+					questionIndices.push(randomIdx);
 //TODO maybe this helps resolve browser hanging
-	        var question = $scope.questionsObj[categoryNum].questions[randomIdx].innerHTML;
-	        randomQuestionsList.push(question);
-	    }
+					var question = $scope.questionsObj[categoryNum].questions[randomIdx].innerHTML;
+					randomQuestionsList.push(question);
+			}
 
 			return randomQuestionsList;
 		}
@@ -264,11 +275,11 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 		};
 
 		$scope.getClass = function(path) {
-	    if ($location.path().substr(0, path.length) == path) {
-	      return "active"
-	    } else {
-	      return ""
-	    }
+			if ($location.path().substr(0, path.length) == path) {
+				return "active"
+			} else {
+				return ""
+			}
 		}
 
 	}]).
