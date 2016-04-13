@@ -11,7 +11,7 @@ angular.module('myApp.main', ['ngSanitize', 'ngRoute']).
 
 	factory('dataCollection', ['$http', '$q', function($http, $q) {
 		var deferred = $q.defer();
-		var interviewUrl = 'http://carolchung.com/src/h5bp_readme.html'; //this url for dev
+		var interviewUrl = 'http://www.carolchung.com/src/h5bp_readme.html'; //this url for dev
 		//next url for production
 		//var interviewUrl =  'https://cch5ng.github.io/angular_front_end_interview/src/h5bp_readme.html';
 
